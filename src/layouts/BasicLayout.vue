@@ -11,6 +11,8 @@
           height: '100vh',
           position: 'fixed',
           left: 0,
+          boxShadow: 'rgba(0, 21, 41, 0.08) 3px 0px 4px 0px',
+          zIndex: 9999999,
         }"
         :trigger="null"
         breakpoint="lg"
@@ -24,11 +26,13 @@
             alignItems: 'center',
             justifyContent: 'center',
             width: '100%',
-            transition: 'none',
+            backgroundColor: navTheme === 'light' ? '#fff' : '#002140',
+            boxShadow:
+              navTheme === 'light' ? 'rgb(232, 232, 232) 1px 1px 0px 0px' : '',
           }"
         >
           <Iconfont type="icon-yiqingfenxi" />
-          <div v-show="!collapsed" style="margin-left: 10px;transition: none">
+          <div v-show="!collapsed" style="margin-left: 10px">
             疫情动态
           </div>
         </div>
@@ -44,6 +48,7 @@
             width: collapsed ? 'calc(100% - 80px)' : 'calc(100% - 256px)',
             'z-index': '999',
             transition: 'all .2s',
+            boxShadow: 'rgba(0, 21, 41, 0.08) 0px 1px 4px 0px',
           }"
         >
           <a-icon
@@ -76,6 +81,8 @@
             marginLeft: collapsed ? '80px' : '256px',
             transition: 'all .2s',
             width: collapsed ? 'calc(100% - 80px)' : 'calc(100% - 256px)',
+            boxShadow: 'rgba(0, 21, 41, 0.08) 0px -1px 4px 0px',
+            zIndex: 999,
           }"
         >
           <Footer />
@@ -132,7 +139,6 @@ export default {
   line-height: 64px;
   text-align: center;
   overflow: hidden;
-  background-color: #002140;
   .anticon {
     font-size: 30px;
   }

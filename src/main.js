@@ -72,7 +72,7 @@ import moment from 'moment'
 
 Vue.filter('dateformat', function(dataStr, pattern = 'YYYY-MM-DD HH:mm:ss') {
   if (dataStr) {
-    return moment(dataStr).format(pattern)
+    return moment(parseInt(dataStr)).format(pattern)
   } else return
 })
 // iconfont

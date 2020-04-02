@@ -55,7 +55,7 @@ const routes = [
           {
             path: '/dashboard/map',
             name: 'map',
-            meta: { title: '疫情地图' },
+            meta: { title: '国内疫情地图' },
             component: () =>
               import(
                 /* webpackChunkName: "dashboard" */ '../views/Dashboard/Map'
