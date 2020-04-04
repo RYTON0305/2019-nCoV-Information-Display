@@ -16,10 +16,13 @@ export default {
     ...mapState(['grayMode']),
   },
   watch: {
-    grayMode(newValue) {
-      document.documentElement.style.filter = newValue
-        ? 'grayscale(100%)'
-        : 'grayscale(0)'
+    grayMode: {
+      handler(newValue) {
+        document.documentElement.style.filter = newValue
+          ? 'grayscale(100%)'
+          : 'grayscale(0)'
+      },
+      immediate: true,
     },
   },
 }
