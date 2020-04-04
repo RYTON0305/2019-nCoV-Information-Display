@@ -63,7 +63,7 @@ export default {
     }
   },
   mounted() {
-    console.log(this.$route.query.navLayout)
+    // console.log(this.$route.query.navLayout)
   },
   filters: {
     handleNavLayoutType: value => {

@@ -41,6 +41,7 @@ import {
   List,
   Avatar,
   Collapse,
+  Switch,
 } from 'ant-design-vue'
 Vue.config.productionTip = false
 
@@ -66,6 +67,7 @@ Vue.use(Tabs)
 Vue.use(List)
 Vue.use(Avatar)
 Vue.use(Collapse)
+Vue.use(Switch)
 
 Vue.prototype.$message = message
 import moment from 'moment'

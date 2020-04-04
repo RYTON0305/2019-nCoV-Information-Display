@@ -5,11 +5,22 @@
 </template>
 <script>
 import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN'
+import { mapState } from 'vuex'
 export default {
   data() {
     return {
       locale: zhCN,
     }
+  },
+  computed: {
+    ...mapState(['grayMode']),
+  },
+  watch: {
+    grayMode(newValue) {
+      document.documentElement.style.filter = newValue
+        ? 'grayscale(100%)'
+        : 'grayscale(0)'
+    },
   },
 }
 </script>

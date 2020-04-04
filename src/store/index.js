@@ -16,6 +16,7 @@ export default new Vuex.Store({
       num: 0,
       list: [],
     },
+    grayMode: window.localStorage.getItem('grayMode') === 'true' || false,
   },
   mutations: {
     getAreaData(state, item) {
@@ -33,6 +34,10 @@ export default new Vuex.Store({
     getRumors(state, item) {
       state.rumorList.list = item
       state.updateTime = item.updateTime
+    },
+    handleGrayMode(state, checked) {
+      state.grayMode = checked
+      window.localStorage.setItem('grayMode', state.grayMode)
     },
   },
   actions: {

@@ -30,6 +30,14 @@
           <a-radio value="left">左侧</a-radio>
           <a-radio value="top">顶部</a-radio>
         </a-radio-group>
+        <div class="list-item">
+          <span>黑白模式</span>
+          <a-switch
+            :defaultChecked="this.$store.state.grayMode"
+            size="small"
+            @change="handleGrayMode"
+          />
+        </div>
       </div>
     </a-drawer>
   </div>
@@ -54,6 +62,9 @@ export default {
           err
         })
     },
+    handleGrayMode(checked) {
+      this.$store.commit('handleGrayMode', checked)
+    },
   },
 }
 </script>
@@ -70,5 +81,10 @@ export default {
   color: #fff;
   font-size: 20px;
   border-radius: 3px 0 0 3px;
+}
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
 }
 </style>
