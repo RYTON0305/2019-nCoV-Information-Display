@@ -83,7 +83,7 @@ Vue.prototype.$message = message;
 Vue.filter('dateformat', (dataStr, pattern = 'YYYY-MM-DD HH:mm:ss') => {
   if (dataStr) {
     return moment(parseInt(dataStr)).format(pattern);
-  } else return;
+  }
 });
 // iconfont
 const Iconfont = Icon.createFromIconfontCN({

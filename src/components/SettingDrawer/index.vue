@@ -57,7 +57,7 @@ export default {
     },
     handleSettingChange(type, value) {
       this.$router.push({ query: { ...this.$route.query, [type]: value } }).catch((err) => {
-        err;
+        console.log('err: ', err);
       });
     },
     handleGrayMode(checked) {
