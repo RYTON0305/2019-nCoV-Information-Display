@@ -1,5 +1,6 @@
 <script>
-import { check } from '../utils/auth'
+import { check } from '../utils/auth';
+
 export default {
   functional: true,
   props: {
@@ -9,8 +10,8 @@ export default {
     },
   },
   render(h, context) {
-    const { props, scopedSlots } = context
-    return check(props.authority) ? scopedSlots.default() : null
+    const { props, scopedSlots } = context;
+    return check(props.authority) ? scopedSlots.default() : null;
   },
-}
+};
 </script>

@@ -1,9 +1,5 @@
 <template>
-  <a-card
-    v-if="cardList[0]"
-    class="container"
-    :title="`截至 ${updateTime} 全国数据统计`"
-  >
+  <a-card v-if="cardList[0]" class="container" :title="`截至 ${updateTime} 全国数据统计`">
     <a-row :gutter="16">
       <a-col v-for="(item, index) in 6" :key="index" :span="8">
         <a-card-grid>
@@ -21,16 +17,11 @@
 
                 <a-tooltip placement="top">
                   <template slot="title">
-                    <span>
-                      疑似数据「较昨日」直接使用国家卫健委公布的「新增疑似」
-                    </span>
+                    <span> 疑似数据「较昨日」直接使用国家卫健委公布的「新增疑似」 </span>
                   </template>
                   <a-icon
                     v-if="index === 1"
-                    style="
-                      color: red;
-                      padding:0 10px
-                    "
+                    style="color: red; padding: 0 10px"
                     type="question-circle"
                   />
                 </a-tooltip>
@@ -45,19 +36,20 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
-import formatTime from '../../utils/formatTime'
+import { mapState, mapActions } from 'vuex';
+import formatTime from '../../utils/formatTime';
+
 export default {
   name: '',
   data() {
     return {
       updateTime: '',
       cardList: [],
-    }
+    };
   },
   async mounted() {
-    await this.getOverallDataAsync()
-    this.updateTime = formatTime(this.overallData.updateTime)
+    await this.getOverallDataAsync();
+    this.updateTime = formatTime(this.overallData.updateTime);
     // this.cardList = {
     //   现存确诊: this.overallData.currentConfirmedCount,
     //   境外输入: this.overallData.suspectedCount,
@@ -115,7 +107,7 @@ export default {
             ? `+${this.overallData.seriousIncr}`
             : this.overallData.seriousIncr,
       },
-    ]
+    ];
   },
 
   computed: {
@@ -124,7 +116,7 @@ export default {
   methods: {
     ...mapActions(['getOverallDataAsync']),
   },
-}
+};
 </script>
 <style lang="less" scoped>
 /deep/ .ant-card-grid {

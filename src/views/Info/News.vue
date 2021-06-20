@@ -4,7 +4,7 @@
     :infinite-scroll-distance="10"
     v-infinite-scroll="loadMore"
     infinite-scroll-immediate-check="false"
-    style="height:calc(100vh - 68.8px - 64px);overflow-y:auto;padding:0 16px"
+    style="height: calc(100vh - 68.8px - 64px); overflow-y: auto; padding: 0 16px"
   >
     <a-input-search
       class="news-input"
@@ -17,25 +17,13 @@
     </a-input-search>
 
     <a-timeline v-if="newsList.list[0]" :pending="true" mode="alternate">
-      <a-timeline-item
-        v-for="(item, index) in newsList.list"
-        :key="item.summary"
-      >
-        <a-icon
-          v-if="index === 0"
-          slot="dot"
-          type="clock-circle-o"
-          style="font-size: 16px;"
-        />
-        <a-card style="width: 500px;">
+      <a-timeline-item v-for="(item, index) in newsList.list" :key="item.summary">
+        <a-icon v-if="index === 0" slot="dot" type="clock-circle-o" style="font-size: 16px" />
+        <a-card style="width: 500px">
           <template slot="title">
             <a-tooltip arrowPointAtCenter placement="top" :title="item.title">
               <span class="news-title">
-                <Iconfont
-                  class="newTag"
-                  v-if="index === 0"
-                  type="icon-zuixin"
-                />
+                <Iconfont class="newTag" v-if="index === 0" type="icon-zuixin" />
                 {{ item.title }}
               </span>
             </a-tooltip>
@@ -63,17 +51,18 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex';
+
 export default {
   name: 'News',
   data() {
     return {
       busy: false,
       province: '',
-    }
+    };
   },
   mounted() {
-    this.getNewsAsync()
+    this.getNewsAsync();
   },
   computed: {
     ...mapState(['newsList']),
@@ -81,25 +70,25 @@ export default {
   methods: {
     ...mapActions(['getNewsAsync']),
     async loadMore() {
-      console.log('loadmore')
-      this.busy = true
-      await this.getNewsAsync()
-      this.busy = false
+      console.log('loadmore');
+      this.busy = true;
+      await this.getNewsAsync();
+      this.busy = false;
     },
     async onSearch(province) {
       if (province) {
-        await this.getNewsAsync({ num: 10, province })
+        await this.getNewsAsync({ num: 10, province });
       }
-      await this.getNewsAsync({ num: 10, province })
+      await this.getNewsAsync({ num: 10, province });
       if (this.newsList.list.length !== 0) {
-        if (province) this.$message.success(`成功搜索到${province}的相关新闻`)
-        this.province = province
+        if (province) this.$message.success(`成功搜索到${province}的相关新闻`);
+        this.province = province;
       } else {
-        this.$message.error('请输入正确的省份或直辖市名称')
+        this.$message.error('请输入正确的省份或直辖市名称');
       }
     },
   },
-}
+};
 </script>
 <style lang="less" scoped>
 .ant-timeline {

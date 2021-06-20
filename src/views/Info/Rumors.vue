@@ -1,15 +1,9 @@
 <template>
   <a-tabs :tabBarGutter="8" type="card" defaultActiveKey="1">
-    <a-tab-pane style="background-color:#f5232e" key="1">
-      <div class="tab-tab tab-tag-rumor" slot="tab">
-        <Iconfont type="icon-jia1" />谣言
-      </div>
+    <a-tab-pane style="background-color: #f5232e" key="1">
+      <div class="tab-tab tab-tag-rumor" slot="tab"><Iconfont type="icon-jia1" />谣言</div>
       <swiper v-if="rumorList.list[0]" class="swiper" :options="swiperOption">
-        <swiper-slide
-          class="swiper-slide"
-          v-for="(item, index) in rumorList.list"
-          :key="item._id"
-        >
+        <swiper-slide class="swiper-slide" v-for="(item, index) in rumorList.list" :key="item._id">
           <a-card :bordered="false" hoverable>
             <div class="rumor-header" slot="cover">
               <div class="rumor-tag">
@@ -24,11 +18,7 @@
             </div>
             <a-card-meta>
               <template slot="title">
-                <a-tooltip
-                  arrowPointAtCenter
-                  placement="top"
-                  :title="item.mainSummary"
-                >
+                <a-tooltip arrowPointAtCenter placement="top" :title="item.mainSummary">
                   <span class="rumor-summary">{{ item.mainSummary }}</span>
                 </a-tooltip>
               </template>
@@ -39,12 +29,10 @@
             </a-card-meta>
           </a-card>
         </swiper-slide>
-        <swiper-slide style="background-color:#fff">
-          <div style="text-align:center;">
-            <div style="padding:20px 0;font-size:30px">
-              继续滑动以加载更多
-            </div>
-            <a-icon style="font-size:50px" type="right-circle" />
+        <swiper-slide style="background-color: #fff">
+          <div style="text-align: center">
+            <div style="padding: 20px 0; font-size: 30px">继续滑动以加载更多</div>
+            <a-icon style="font-size: 50px" type="right-circle" />
           </div>
         </swiper-slide>
         <!-- 分页器 -->
@@ -54,9 +42,9 @@
     <div class="swiper-button-next" slot="button-next"></div> -->
       </swiper>
     </a-tab-pane>
-    <a-tab-pane style="background-color:#43d75d" key="2">
+    <a-tab-pane style="background-color: #43d75d" key="2">
       <div class="tab-tab tab-tag-true" slot="tab">
-        <Iconfont style="font-size: 33px;" type="icon-zhen" />
+        <Iconfont style="font-size: 33px" type="icon-zhen" />
         可信消息
       </div>
       <Trusted
@@ -66,9 +54,9 @@
         }"
       />
     </a-tab-pane>
-    <a-tab-pane style="background-color:#bbb" key="3">
+    <a-tab-pane style="background-color: #bbb" key="3">
       <div class="tab-tab tab-tag-doubtful" slot="tab">
-        <Iconfont style="font-size: 28px;" type="icon-wenhao" />
+        <Iconfont style="font-size: 28px" type="icon-wenhao" />
         未确认消息
       </div>
       <Trusted
@@ -82,8 +70,8 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
-import Trusted from './Trusted'
+import { mapState, mapActions } from 'vuex';
+import Trusted from './Trusted';
 // import NoConfirm from './NoConfirm.vue'
 
 export default {
@@ -114,19 +102,19 @@ export default {
         slideToClickedSlide: true,
         on: {
           reachEnd: () => {
-            this.getRumorsAsync()
+            this.getRumorsAsync();
           },
         },
       },
-    }
+    };
   },
   components: {
     Trusted,
     // NoConfirm,
   },
   mounted() {
-    this.getRumorsAsync()
-    console.log(this.rumorList)
+    this.getRumorsAsync();
+    console.log(this.rumorList);
   },
   computed: {
     ...mapState(['rumorList']),
@@ -134,7 +122,7 @@ export default {
   methods: {
     ...mapActions(['getRumorsAsync']),
   },
-}
+};
 </script>
 
 <style lang="less" scoped>

@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import 'echarts/map/js/china.js'
-import { mapState, mapActions } from 'vuex'
+import 'echarts/map/js/china.js';
+import { mapState, mapActions } from 'vuex';
 
 export default {
   props: {
@@ -74,15 +74,7 @@ export default {
             // textStyle:{}
             inRange: {
               symbol: 'rect',
-              color: [
-                '#fff',
-                '#fcebcf',
-                '#f59e83',
-                '#e45a4f',
-                '#cb2a2e',
-                '#811c24',
-                '#4f060d',
-              ],
+              color: ['#fff', '#fcebcf', '#f59e83', '#e45a4f', '#cb2a2e', '#811c24', '#4f060d'],
             },
             itemWidth: 10,
             itemHeight: 10,
@@ -96,7 +88,7 @@ export default {
           },
         },
       },
-    }
+    };
   },
   computed: {
     ...mapState(['areaData']),
@@ -104,33 +96,30 @@ export default {
   watch: {
     mapType(newVal) {
       // console.log('change')
-      this.formatMapData()
-      this.option.series[0].name =
-        newVal === 'confirmedCount' ? '累计确诊：' : '现存确诊：'
+      this.formatMapData();
+      this.option.series[0].name = newVal === 'confirmedCount' ? '累计确诊：' : '现存确诊：';
     },
   },
   mounted() {},
   async created() {
-    await this.getAreaDataAsync()
-    this.formatMapData()
+    await this.getAreaDataAsync();
+    this.formatMapData();
   },
   methods: {
     ...mapActions(['getAreaDataAsync']),
     formatMapData() {
-      let formatMapData = JSON.parse(JSON.stringify(this.areaData)).map(
-        item => ({
-          name: item['provinceShortName'],
-          value: item[`${this.mapType}`],
-        })
-      )
+      const formatMapData = JSON.parse(JSON.stringify(this.areaData)).map((item) => ({
+        name: item.provinceShortName,
+        value: item[`${this.mapType}`],
+      }));
       formatMapData.push({
         name: '南海诸岛',
         value: 0,
-      })
-      this.option.series[0].data = formatMapData
+      });
+      this.option.series[0].data = formatMapData;
     },
   },
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

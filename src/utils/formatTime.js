@@ -1,15 +1,9 @@
 export default function formatTime(time) {
-  let fTime = new Date(time),
-    y = fTime.getFullYear(),
-    m = fTime.getMonth() + 1,
-    d = fTime.getDate()
-  return (
-    y +
-    '-' +
-    (m < 10 ? '0' + m : m) +
-    '-' +
-    (d < 10 ? '0' + d : d) +
-    ' ' +
-    fTime.toTimeString().substr(0, 8)
-  )
+  const fTime = new Date(time);
+  const y = fTime.getFullYear();
+  const m = fTime.getMonth() + 1;
+  const d = fTime.getDate();
+  return `${y}-${m < 10 ? `0${m}` : m}-${d < 10 ? `0${d}` : d} ${fTime
+    .toTimeString()
+    .substr(0, 8)}`;
 }

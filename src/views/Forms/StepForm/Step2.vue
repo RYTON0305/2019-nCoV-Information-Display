@@ -1,15 +1,13 @@
 <template>
-  <div>
-    步骤二
-  </div>
+  <div>步骤二</div>
 </template>
 
 <script>
 export default {
   name: '',
   data() {
-    return {}
+    return {};
   },
-}
+};
 </script>
 <style lang="less" scoped></style>

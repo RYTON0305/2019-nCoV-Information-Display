@@ -16,7 +16,7 @@
       <div>
         <h2>整体风格</h2>
         <a-radio-group
-          @change="e => handleSettingChange('navTheme', e.target.value)"
+          @change="(e) => handleSettingChange('navTheme', e.target.value)"
           :value="$route.query.navTheme || 'dark'"
         >
           <a-radio value="dark">黑色</a-radio>
@@ -24,7 +24,7 @@
         </a-radio-group>
         <h2>导航模式</h2>
         <a-radio-group
-          @change="e => handleSettingChange('navLayout', e.target.value)"
+          @change="(e) => handleSettingChange('navLayout', e.target.value)"
           :value="$route.query.navLayout || 'left'"
         >
           <a-radio value="left">左侧</a-radio>
@@ -49,24 +49,22 @@ export default {
       visible: false,
       navTheme: 'dark',
       navLayout: 'left',
-    }
+    };
   },
   methods: {
     onClose() {
-      this.visible = false
+      this.visible = false;
     },
     handleSettingChange(type, value) {
-      this.$router
-        .push({ query: { ...this.$route.query, [type]: value } })
-        .catch(err => {
-          err
-        })
+      this.$router.push({ query: { ...this.$route.query, [type]: value } }).catch((err) => {
+        err;
+      });
     },
     handleGrayMode(checked) {
-      this.$store.commit('handleGrayMode', checked)
+      this.$store.commit('handleGrayMode', checked);
     },
   },
-}
+};
 </script>
 <style lang="less" scoped>
 .handle {

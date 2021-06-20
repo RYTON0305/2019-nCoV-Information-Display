@@ -1,14 +1,12 @@
 <template>
-  <div>
-    注册页
-  </div>
+  <div>注册页</div>
 </template>
 
 <script>
 export default {
   data() {
-    return {}
+    return {};
   },
-}
+};
 </script>
 <style lang="less" scoped></style>

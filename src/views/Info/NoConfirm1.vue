@@ -1,10 +1,5 @@
 <template>
-  <a-list
-    bordered=""
-    itemLayout="vertical"
-    size="large"
-    :dataSource="trustList"
-  >
+  <a-list bordered="" itemLayout="vertical" size="large" :dataSource="trustList">
     <!-- <div slot="footer"><b>ant design vue</b> footer part</div> -->
     <a-list-item slot="renderItem" slot-scope="item" key="item._id">
       <a-list-item-meta>
@@ -30,16 +25,15 @@ export default {
   data() {
     return {
       trustList: [],
-      customStyle:
-        'background: #f7f7f7;border-radius: 4px;border: 0;overflow: hidden',
-    }
+      customStyle: 'background: #f7f7f7;border-radius: 4px;border: 0;overflow: hidden',
+    };
   },
   mounted() {
-    this.axios.get('/noconfirm.json').then(res => {
-      this.trustList = res.data.results
-    })
+    this.axios.get('/noconfirm.json').then((res) => {
+      this.trustList = res.data.results;
+    });
   },
-}
+};
 </script>
 <style lang="less" scoped>
 .ant-list {

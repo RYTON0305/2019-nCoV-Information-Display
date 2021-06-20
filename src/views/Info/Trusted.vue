@@ -4,7 +4,7 @@
     :infinite-scroll-distance="10"
     v-infinite-scroll="loadMore"
     infinite-scroll-immediate-check="false"
-    style="height:calc(100vh - 64px - 68.8px - 40px);overflow-y:auto"
+    style="height: calc(100vh - 64px - 68.8px - 40px); overflow-y: auto"
   >
     <a-list
       v-if="trustList[0]"
@@ -48,7 +48,8 @@
   </div>
 </template>
 <script>
-import { getRumors } from '../../api/request'
+import { getRumors } from '../../api/request';
+
 export default {
   props: {
     rumorInfo: {
@@ -63,32 +64,31 @@ export default {
     return {
       busy: true,
       trustList: [],
-      customStyle:
-        'background: #f7f7f7;border-radius: 4px;border: 0;overflow: hidden',
+      customStyle: 'background: #f7f7f7;border-radius: 4px;border: 0;overflow: hidden',
       loadingMore: false,
       showLoadingMore: true,
       num: 10,
       loaded: false,
-    }
+    };
   },
   computed: {},
   async mounted() {
     this.trustList = await getRumors({
       rumorType: this.rumorInfo.rumorType,
       num: this.num,
-    })
+    });
   },
   methods: {
     async loadMore() {
-      if (this.loaded) return
-      this.num += 10
-      this.busy = true
-      this.trustList = await getRumors({ rumorType: 1, num: this.num })
-      this.loaded = Object.keys(this.trustList).length != this.trustList
-      this.busy = false
+      if (this.loaded) return;
+      this.num += 10;
+      this.busy = true;
+      this.trustList = await getRumors({ rumorType: 1, num: this.num });
+      this.loaded = Object.keys(this.trustList).length != this.trustList;
+      this.busy = false;
     },
     onLoadMore() {
-      this.trustList = this.trustList.concat(this.trustList)
+      this.trustList = this.trustList.concat(this.trustList);
 
       // this.getData(res => {
       //   this.data = this.data.concat(res.results);
@@ -99,7 +99,7 @@ export default {
       // });
     },
   },
-}
+};
 </script>
 <style lang="less" scoped>
 .ant-list {

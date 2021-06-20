@@ -1,15 +1,13 @@
 <template>
-  <div>
-    403
-  </div>
+  <div>403</div>
 </template>
 
 <script>
 export default {
   name: '',
   data() {
-    return {}
+    return {};
   },
-}
+};
 </script>
 <style lang="less" scoped></style>

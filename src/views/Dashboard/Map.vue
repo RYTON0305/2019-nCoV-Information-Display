@@ -14,24 +14,24 @@
 </template>
 
 <script>
-import MapChart from './MapChart.vue'
+import MapChart from './MapChart.vue';
 
 export default {
   name: '',
   data() {
     return {
       mapType: 'currentConfirmedCount',
-    }
+    };
   },
   components: {
     MapChart,
   },
   methods: {
     handleMapType(e) {
-      this.mapType = e.target.value
+      this.mapType = e.target.value;
     },
   },
-}
+};
 </script>
 <style lang="less" scoped>
 .container {

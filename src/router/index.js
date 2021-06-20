@@ -1,19 +1,19 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import NotFound from '../views/404'
-import NProgress from 'nprogress'
-import 'nprogress/nprogress.css'
-import { check, isLogin } from '../utils/auth'
-import findLast from 'lodash/findLast'
-import Forbidden from '../views/403'
-Vue.use(VueRouter)
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import NotFound from '../views/404';
+import NProgress from 'nprogress';
+import 'nprogress/nprogress.css';
+import { check, isLogin } from '../utils/auth';
+import findLast from 'lodash/findLast';
+import Forbidden from '../views/403';
+
+Vue.use(VueRouter);
 
 const routes = [
   {
     path: '/user',
     hideInMenu: true,
-    component: () =>
-      import(/* webpackChunkName: "layout" */ '../layouts/UserLayout.vue'),
+    component: () => import(/* webpackChunkName: "layout" */ '../layouts/UserLayout.vue'),
     children: [
       {
         path: '/user',
@@ -22,24 +22,19 @@ const routes = [
       {
         path: '/user/login',
         name: 'login',
-        component: () =>
-          import(/* webpackChunkName: "login" */ '../views/User/Login.vue'),
+        component: () => import(/* webpackChunkName: "login" */ '../views/User/Login.vue'),
       },
       {
         path: '/user/register',
         name: 'register',
-        component: () =>
-          import(
-            /* webpackChunkName: "register" */ '../views/User/Register.vue'
-          ),
+        component: () => import(/* webpackChunkName: "register" */ '../views/User/Register.vue'),
       },
     ],
   },
   {
     path: '/',
     authority: ['admin', 'user'],
-    component: () =>
-      import(/* webpackChunkName: "layout" */ '../layouts/BasicLayout'),
+    component: () => import(/* webpackChunkName: "layout" */ '../layouts/BasicLayout'),
     children: [
       // dashboard
       {
@@ -50,16 +45,13 @@ const routes = [
         path: '/dashboard',
         name: 'dashboard',
         meta: { icon: 'dashboard', title: '疫情地图' },
-        component: { render: h => h('router-view') },
+        component: { render: (h) => h('router-view') },
         children: [
           {
             path: '/dashboard/map',
             name: 'map',
             meta: { title: '国内疫情地图' },
-            component: () =>
-              import(
-                /* webpackChunkName: "dashboard" */ '../views/Dashboard/Map'
-              ),
+            component: () => import(/* webpackChunkName: "dashboard" */ '../views/Dashboard/Map'),
           },
         ],
       },
@@ -69,7 +61,7 @@ const routes = [
         path: '/form',
         name: 'form',
         meta: { icon: 'area-chart', title: '疫情数据', authority: ['admin'] },
-        component: { render: h => h('router-view') },
+        component: { render: (h) => h('router-view') },
         children: [
           {
             path: '/form/overall',
@@ -88,8 +80,7 @@ const routes = [
             name: 'stepForm',
             meta: { title: '分步表单' },
             hideChildrenInMenu: true,
-            component: () =>
-              import(/* webpackChunkName: "form" */ '../views/Forms/StepForm/'),
+            component: () => import(/* webpackChunkName: "form" */ '../views/Forms/StepForm/'),
             children: [
               {
                 path: '/form/step-form',
@@ -99,36 +90,30 @@ const routes = [
                 path: '/form/step-form/info',
                 name: 'info1',
                 component: () =>
-                  import(
-                    /* webpackChunkName: "form" */ '../views/Forms/StepForm/Step1'
-                  ),
+                  import(/* webpackChunkName: "form" */ '../views/Forms/StepForm/Step1'),
               },
               {
                 path: '/form/step-form/confirm',
                 name: 'confirm',
                 component: () =>
-                  import(
-                    /* webpackChunkName: "form" */ '../views/Forms/StepForm/Step2'
-                  ),
+                  import(/* webpackChunkName: "form" */ '../views/Forms/StepForm/Step2'),
               },
               {
                 path: '/form/step-form/result',
                 name: 'result',
                 component: () =>
-                  import(
-                    /* webpackChunkName: "form" */ '../views/Forms/StepForm/Step3'
-                  ),
+                  import(/* webpackChunkName: "form" */ '../views/Forms/StepForm/Step3'),
               },
             ],
           },
         ],
       },
-      //信息
+      // 信息
       {
         path: '/info',
         name: 'info',
         meta: { icon: 'paper-clip', title: '疫情信息', authority: ['admin'] },
-        component: { render: h => h('router-view') },
+        component: { render: (h) => h('router-view') },
         children: [
           {
             path: '/info/news',
@@ -158,33 +143,33 @@ const routes = [
     hideInMenu: true,
     component: Forbidden,
   },
-]
+];
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes,
-})
+});
 
 router.beforeEach((to, from, next) => {
   if (to.path !== from.path) {
-    NProgress.start()
+    NProgress.start();
   }
-  const record = findLast(to.matched, item => item.meta.authority)
+  const record = findLast(to.matched, (item) => item.meta.authority);
   if (record && !check(record.meta.authority)) {
     if (!isLogin() && to.path !== '/user/login') {
       next({
         path: '/user/login',
-      })
+      });
     } else if (to.path !== '/403') {
       next({
         path: '/403',
-      })
+      });
     }
-    NProgress.done()
+    NProgress.done();
   }
-  next()
-})
+  next();
+});
 // router.beforeEach((to, from, next) => {
 //   if (to.path != from.path) {
 //     NProgress.start()
@@ -206,6 +191,6 @@ router.beforeEach((to, from, next) => {
 // })
 
 router.afterEach(() => {
-  NProgress.done()
-})
-export default router
+  NProgress.done();
+});
+export default router;

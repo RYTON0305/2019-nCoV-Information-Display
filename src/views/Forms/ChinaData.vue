@@ -1,10 +1,10 @@
 <template>
   <a-table
     :rowKey="
-      record => {
+      (record) => {
         return record.locationId == 0 && record.locationId == -1
           ? record.locationId
-          : Math.random()
+          : Math.random();
       }
     "
     :columns="columns"
@@ -16,9 +16,10 @@
   />
 </template>
 <script>
-import { cloneDeep } from 'lodash'
-import { mapState, mapActions } from 'vuex'
-let timer
+import { cloneDeep } from 'lodash';
+import { mapState, mapActions } from 'vuex';
+
+let timer;
 
 export default {
   name: 'Table',
@@ -28,7 +29,7 @@ export default {
       screenHeight: document.documentElement.clientHeight, // 屏幕高度
       // screenWidth: document.body.clientWidth, // 这里是给到了一个默认值 （这个很重要）
       // scrollBarWidth: 0,
-    }
+    };
   },
   mounted() {
     // this.scrollBarWidth =
@@ -38,22 +39,22 @@ export default {
     window.onresize = () => {
       // console.log('不使用防抖宽高', this.screenWidth, this.screenHeight)
       if (timer) {
-        clearTimeout(timer)
+        clearTimeout(timer);
       }
       timer = setTimeout(() => {
-        this.screenHeight = document.documentElement.clientHeight // 窗口高度
+        this.screenHeight = document.documentElement.clientHeight; // 窗口高度
         // this.screenWidth = document.documentElement.clientHeight // 窗口宽度
 
         // console.log(this.screenWidth, this.screenHeight)
-      }, 200)
-    }
+      }, 200);
+    };
   },
   computed: {
     // tableWidth() {
     //   return this.screenWidth - 256 - 16 * 2 - this.scrollBarWidth - 16 * 2 - 1
     // },
     tableHeight() {
-      return this.screenHeight - 64 - 52.8 * 2 - 68.8
+      return this.screenHeight - 64 - 52.8 * 2 - 68.8;
     }, // 屏幕高
     ...mapState(['areaData']),
     columns() {
@@ -98,37 +99,34 @@ export default {
             },
           ],
         },
-      ]
-      return columns
+      ];
+      return columns;
     },
   },
   async created() {
     if (!this.areaData[0]) {
-      await this.getAreaDataAsync()
+      await this.getAreaDataAsync();
     }
-    this.formatArea()
+    this.formatArea();
     // this.tableData = this.areaData
   },
   methods: {
     ...mapActions(['getAreaDataAsync']),
     formatArea() {
-      let tableData = cloneDeep(this.areaData)
+      const tableData = cloneDeep(this.areaData);
       this.tableData = JSON.parse(
-        JSON.stringify(tableData).replace(
-          /provinceShortName|cityName/g,
-          'areaName'
-        )
-      ).sort((a, b) => b.currentConfirmedCount - a.currentConfirmedCount)
+        JSON.stringify(tableData).replace(/provinceShortName|cityName/g, 'areaName'),
+      ).sort((a, b) => b.currentConfirmedCount - a.currentConfirmedCount);
     },
     debounce(fn, delay) {
-      let timeout = null
-      if (timeout !== null) clearTimeout(timeout)
+      let timeout = null;
+      if (timeout !== null) clearTimeout(timeout);
       timeout = setTimeout(() => {
-        fn.call(this, arguments)
-      }, delay)
+        fn.call(this, arguments);
+      }, delay);
     },
   },
-}
+};
 </script>
 <style lang="less" scoped>
 /deep/th:nth-of-type(1) {

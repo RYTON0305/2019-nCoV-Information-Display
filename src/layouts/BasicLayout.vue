@@ -27,14 +27,11 @@
             justifyContent: 'center',
             width: '100%',
             backgroundColor: navTheme === 'light' ? '#fff' : '#002140',
-            boxShadow:
-              navTheme === 'light' ? 'rgb(232, 232, 232) 1px 1px 0px 0px' : '',
+            boxShadow: navTheme === 'light' ? 'rgb(232, 232, 232) 1px 1px 0px 0px' : '',
           }"
         >
           <Iconfont type="icon-yiqingfenxi" />
-          <div v-show="!collapsed" style="margin-left: 10px">
-            疫情动态
-          </div>
+          <div v-show="!collapsed" style="margin-left: 10px">疫情动态</div>
         </div>
         <SiderMenu :theme="navTheme" :collapsed="collapsed" />
       </a-layout-sider>
@@ -96,23 +93,23 @@
 </template>
 
 <script>
-import Header from './Header.vue'
-import Footer from './Footer.vue'
-import SiderMenu from './SiderMenu.vue'
-import SettingDrawer from '../components/SettingDrawer'
+import Header from './Header.vue';
+import Footer from './Footer.vue';
+import SiderMenu from './SiderMenu.vue';
+import SettingDrawer from '../components/SettingDrawer';
 
 export default {
   data() {
     return {
       collapsed: false,
-    }
+    };
   },
   computed: {
     navTheme() {
-      return this.$route.query.navTheme || 'dark'
+      return this.$route.query.navTheme || 'dark';
     },
     navLayout() {
-      return this.$route.query.navLayout || 'left'
+      return this.$route.query.navLayout || 'left';
     },
   },
   components: {
@@ -121,7 +118,7 @@ export default {
     SiderMenu,
     SettingDrawer,
   },
-}
+};
 </script>
 <style lang="less" scoped>
 .trigger {

@@ -23,7 +23,8 @@
  * recommend SubMenu.vue https://github.com/vueComponent/ant-design-vue/blob/master/components/menu/demo/SubMenu.vue
  * SubMenu1.vue https://github.com/vueComponent/ant-design-vue/blob/master/components/menu/demo/SubMenu1.vue
  * */
-import SubMenu from './SubMenu'
+import SubMenu from './SubMenu';
+
 export default {
   components: {
     'sub-menu': SubMenu,
@@ -35,39 +36,35 @@ export default {
     },
   },
   data() {
-    const menuData = this.getMenuData(this.$router.options.routes)
+    const menuData = this.getMenuData(this.$router.options.routes);
 
     return {
       collapsed: false,
       menuData,
       openKeys: [],
       selectedKeys: [],
-    }
+    };
   },
   methods: {
     toggleCollapsed() {
-      this.collapsed = !this.collapsed
+      this.collapsed = !this.collapsed;
     },
     getMenuData(routes) {
-      const menuData = []
-      routes.forEach(item => {
+      const menuData = [];
+      routes.forEach((item) => {
         if (item.name && !item.hideInMenu) {
-          const newItem = { ...item }
-          delete newItem.children
+          const newItem = { ...item };
+          delete newItem.children;
           if (!item.hideChildrenInMenu && item.children) {
-            newItem.children = this.getMenuData(item.children)
+            newItem.children = this.getMenuData(item.children);
           }
-          menuData.push(newItem)
-        } else if (
-          !item.hideInMenu &&
-          !item.hideChildrenInMenu &&
-          item.children
-        ) {
-          menuData.push(...this.getMenuData(item.children))
+          menuData.push(newItem);
+        } else if (!item.hideInMenu && !item.hideChildrenInMenu && item.children) {
+          menuData.push(...this.getMenuData(item.children));
         }
-      })
-      return menuData
+      });
+      return menuData;
     },
   },
-}
+};
 </script>
